@@ -135,11 +135,13 @@ body, html {
         justify-content: flex-start;
         align-items: flex-start;
     }
-
+    .chat-header {
+        font-size: 20px;
+    }
     .chat-container {
-        width: 90%;
+        width: 99%;
         height: 90vh;
-        padding: 5%;
+        padding: 1%;
         border-radius: 0;
     }
 
