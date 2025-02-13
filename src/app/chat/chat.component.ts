@@ -15,19 +15,21 @@ export class ChatComponent {
 
   messages: { text: string; sender: 'user' | 'bot' }[] = [];
   userInput: string = '';
+  loading:boolean = false;
 
   @ViewChild('chatBox') chatBox!: ElementRef;
 
   constructor(private chatService: ChatserviceService) {}
 
   sendMessage() {
-    if (!this.userInput.trim()) return;
+    if (!this.userInput.trim() || this.loading) return;
 
     this.messages.push({ text: this.userInput, sender: 'user' });
 
     const userMessage = this.userInput;
     this.userInput = '';
 
+    this.loading = true;
     setTimeout(() => this.scrollToBottom(), 100);
 
    
@@ -35,6 +37,8 @@ export class ChatComponent {
       let botReply = response.candidates?.[0]?.content?.parts?.[0]?.text || "I didn't understand.";
       botReply = botReply.replace(/\*/g, '');
       this.messages.push({ text: botReply, sender: 'bot' });
+
+      this.loading = false;
 
       setTimeout(() => this.scrollToBottom(), 100);
     });

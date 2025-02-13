@@ -7,12 +7,16 @@
     <div *ngFor="let msg of messages" [ngClass]="{'message': true, 'user': msg.sender === 'user', 'bot': msg.sender === 'bot'}">
       <p>{{ msg.text }}</p>
     </div>
+    <div *ngIf="loading" class="loading-message">
+      <div class="dot-flashing"></div>
+    </div>
   </div>
 
   <div class="chat-input">
     <input [(ngModel)]="userInput" (keyup.enter)="sendMessage()" placeholder="Type a message..." />
-    <button (click)="sendMessage()">
-      <span>Send</span>
+    <button (click)="sendMessage()" [disabled]="loading">
+      <span *ngIf="!loading">Send</span>
+      <span *ngIf="loading">...</span>
     </button>
   </div>
 </div>

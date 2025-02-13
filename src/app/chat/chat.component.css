@@ -129,7 +129,54 @@ body, html {
     transform: scale(0.95);
 }
 
+.loading-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
 
+.dot-flashing {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #007bff;
+    animation: dotFlashing 1s infinite linear alternate;
+    position: relative;
+}
+
+.dot-flashing::before,
+.dot-flashing::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #007bff;
+    position: absolute;
+    animation: dotFlashing 1s infinite linear alternate;
+}
+
+.dot-flashing::before {
+    left: -15px;
+    animation-delay: 0.2s;
+}
+
+.dot-flashing::after {
+    left: 15px;
+    animation-delay: 0.4s;
+}
+
+@keyframes dotFlashing {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* Disable button when loading */
+.chat-input button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
 @media (max-width: 768px) {
     body, html {
         justify-content: flex-start;
